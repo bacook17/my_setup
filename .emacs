@@ -1,0 +1,74 @@
+;; Tell emacs where is your personal elisp lib dir
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#2d3743" "#ff4242" "#74af68" "#dbdb95" "#34cae2" "#008b8b" "#00ede1" "#e1e1e0"])
+ '(custom-enabled-themes (quote (misterioso)))
+ '(custom-safe-themes
+   (quote
+    ("150e6e8c5fe6a5377ed334f1d9f4f59f8d8255d6e8ac92aa0193fe02a5c59e6d" "1eb113df6b9be2b3cb49ef315f299148910c65f0e868edf31b5a994c01953e39" "b48a53b5f958509e18d3e5213f132608aabc444cc882136b0e31aa46df043ec6" "144fb347eb78112504b3538e219b8c54070fab6dadf92679c45a78d737408cfb" "315ce87d01b9692280c08a27cf58ed3b8c843915b5f7f67e32d37b84be882bce" default)))
+ '(inhibit-startup-screen t)
+ '(send-mail-function (quote mailclient-send-it)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "#000000" :foreground "gray80" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default")))))
+(add-hook 'latex-mode-hook 'auto-fill-mode)
+(add-hook 'latex-mode-hook 'flyspell-mode)
+;; Set the number to the number of columns to use.
+(setq-default fill-column 79)
+
+;; Add Autofill mode to mode hooks.
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; Show line number in the mode line.
+(line-number-mode 1)
+
+;; Show column number in the mode line.
+(column-number-mode 1)
+
+(global-font-lock-mode 1)
+(load-library "python")
+
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+
+(setq interpreter-mode-alist
+      (cons '("python" . python-mode)
+	    interpreter-mode-alist)
+      python-mode-hook
+      '(lambda () (progn
+		    (set-variable 'py-indent-offset 4)
+		    (set-variable 'indent-tabs-mode nil))))
+(require 'column-marker)
+(set-face-background 'column-marker-1 "red")
+(add-hook 'python-mode-hook
+	  (lambda () (interactive)
+	    (column-marker-1 fill-column)))
+;; Setup for Flymake code checking.
+(require 'flymake)
+(load-library "flymake-cursor")
+
+;; Script that flymake uses to check code. This script must be
+;; present in the system path.
+(setq pycodechecker "pychecker")
+
+(when (load "flymake" t)
+  (defun flymake-pycodecheck-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+		       'flymake-create-temp-inplace))
+	   (local-file (file-relative-name
+			temp-file
+			(file-name-directory buffer-file-name))))
+      (list pycodechecker (list local-file))))
+  (add-to-list 'flymake-allowed-file-name-masks
+	       '("\\.py\\'" flymake-pycodecheck-init)))
+
+(add-hook 'python-mode-hook 'flymake-mode)
