@@ -4,33 +4,18 @@
 
 # Open specified files in Sublime Text
 # "s ." will open the current directory in Sublime
-alias s='open -a "Sublime Text"'
 alias e='emacs -nw'
 alias rm='rm -i'
-alias cfalogin='ssh -Y bcook@mars.cfa.harvard.edu'
-alias scptunnel='ssh -N -f -L 2200:cfa0.cfa.harvard.edu:22 bcook@login.cfa.harvard.edu'
-alias acrobat='/Applications/Adobe\ Acrobat\ XI\ Pro/Adobe\ Acrobat\ Pro.app/Contents/MacOS/AdobeAcrobat'
-alias openauth='~/bcook-openauth/bcook-openauth.sh &'
-alias glog='git log --oneline'
-alias help_tunnel="cat ~/tunneling_help.txt"
-function odyssey() {
-    openauth
-    ssh -Y ody
-}
 function notebook() {
     jupyter notebook $1
 }
 
-# added by Anaconda 2.0.1 installer
-export OLDPATH="$PATH"
-export OLDPYTHONPATH="$PYTHONPATH"
+# UPDATE THIS
+export HOME_PATH="/Users/bcook"
+export CONDA_PATH="${HOME_PATH}/anaconda"
 
-# added by Miniconda2 4.3.21 installer
-#export PATH="/Users/bcook/miniconda2/bin:/Users/bcook/scripts:/opt/local/bin:/opt/local/sbin:$PATH"
-#export PYTHONPATH="/Users/bcook/miniconda2/bin:/Users/bcook/miniconda2/lib:/Users/bcook/miniconda2/lib/python2.7/site-packages:/Users/bcook/scripts:/Users/bcook/pCMDs/pixcmd:/Users/bcook/dynesty:$PYTHONPATH"
-
-export PATH="/Users/bcook/anaconda/bin:/Users/bcook/scripts:/opt/local/bin:/opt/local/sbin:$PATH"
-export PYTHONPATH="/Users/bcook/anaconda/bin:/Users/bcook/anaconda/lib:/Users/bcook/anaconda/lib/python2.7/site-packages:/Users/bcook/scripts:/Users/bcook/pCMDs/pixcmd:/Users/bcook/pCMDs/pcmdpy/:/Users/bcook/dynesty:$PYTHONPATH:."
+export PATH="${CONDA_PATH}/bin:${HOME_PATH}/scripts:/opt/local/bin:/opt/local/sbin:$PATH"
+export PYTHONPATH="${CONDA_PATH}/bin:${CONDA_PATH}/lib:${CONDA_PATH}/lib/python2.7/site-packages:${HOME_PATH}/scripts:$PYTHONPATH:."
 
 # Color LS
 colorflag="-G"
@@ -38,31 +23,6 @@ alias ls="command ls ${colorflag}"
 alias l="ls -laFh ${colorflag}" # all files, in long format
 alias lt="ls -latFh ${colorflag}" # all files, in long format, sorted by date
 alias lsd='ls -lFh ${colorflag} | grep "^d"' # only directories
-
-# Quicker navigation
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-
-# Shortcuts to my Code folder in my home directory
-alias code="cd ~/Code"
-alias sites="cd ~/Code/sites"
-
-# Enable aliases to be sudo’ed
-alias sudo='sudo '
-
-# Colored up cat!
-# You must install Pygments first - "sudo easy_install Pygments"
-alias c='pygmentize -O style=monokai -f console256 -g'
-
-# Git
-# You must install Git first - ""
-alias gs='git status'
-alias ga='git add .'
-alias gc='git commit -m' # requires you to type a commit message
-alias gp='git push'
-
 
 ### Prompt Colors
 # Modified version of @gf3’s Sexy Bash Prompt
