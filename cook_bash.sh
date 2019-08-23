@@ -6,6 +6,7 @@
 # "s ." will open the current directory in Sublime
 alias e='emacs -nw'
 alias rm='rm -i'
+
 function notebook() {
     jupyter notebook $1
 }
@@ -17,8 +18,12 @@ export CONDA_PATH="${HOME_PATH}/anaconda"
 export PATH="${CONDA_PATH}/bin:${HOME_PATH}/scripts:/opt/local/bin:/opt/local/sbin:$PATH"
 export PYTHONPATH="${CONDA_PATH}/bin:${CONDA_PATH}/lib:${CONDA_PATH}/lib/python2.7/site-packages:${HOME_PATH}/scripts:$PYTHONPATH:."
 
+
 # Color LS
+# for OSX
 colorflag="-G"
+# for Linux machines
+# colorflag="--color"
 alias ls="command ls ${colorflag}"
 alias l="ls -laFh ${colorflag}" # all files, in long format
 alias lt="ls -latFh ${colorflag}" # all files, in long format, sorted by date
@@ -87,7 +92,7 @@ function parse_git_branch() {
 # (http://en.wikipedia.org/wiki/Unicode_symbols)
 symbol="⚡  "
 
-export PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\] @ \[$ORANGE\]MacBook \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n$symbol\[$RESET\]"
+export PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\] @ \[$ORANGE\]${HOSTNAME} \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n$symbol\[$RESET\]"
 export PS2="\[$ORANGE\]→ \[$RESET\]"
 
 
