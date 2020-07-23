@@ -1,6 +1,19 @@
 SHELL=/bin/bash
 
-my_setup: emacs bash latex git matplotlib
+my_setup: bash latex git conda environment extensions emacs matplotlib
+
+conda:
+	-@sh install_conda.sh
+	-@rm Miniconda3-latest-Linux-x86_64.sh
+
+environment:
+	@conda env create -f ben_cook_qr.yml
+	@echo "\n\n**********\nIMPORTANT:\nIt is now recommended that you add the following to your .bashrc file: \n"
+	@echo "conda activate boston_qr"
+	@echo "\nso this environment is activated upon connecting\n**********\n"
+
+extensions:
+	-@sh install_extensions.sh
 
 emacs:	./.emacs
 	cp .emacs ~/

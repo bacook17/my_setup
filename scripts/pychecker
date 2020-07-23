@@ -2,5 +2,5 @@
 
 pyflakes "$1"
 #pycodestyle --ignore=E221,E701,E202 --repeat "$1"
-pycodestyle --repeat "$1"
+pycodestyle --ignore=W291,W293,W391,W503,E129,E226,E231,E501 --repeat "$1"
 true
