@@ -10,6 +10,11 @@ alias e='emacs -nw'
 alias rm='rm -i'
 alias mv='mv -vn'
 alias cp='cp -vn'
+alias sshtick14='ssh ben.cook@ch1devtick14'
+alias sshtick15='ssh ben.cook@ch1devtick15'
+alias sshtick16='ssh ben.cook@ch1devtick16'
+alias sshtick21='ssh ben.cook@ch1devtick21'
+
 
 function notebook() {
     jupyter lab $1
