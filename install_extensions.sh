@@ -7,6 +7,7 @@ jupyter labextension install @ryantam626/jupyterlab_code_formatter
 jupyter serverextension enable --py jupyterlab_code_formatter
 jupyter labextension install @aquirdturtle/collapsible_headings
 jupyter labextension install @jupyterlab/toc
+jupyter labextension install @jupyterlab/git
 jupyter labextension install @bokeh/jupyter_bokeh
 echo "finalizing build"
 jupyter lab build
