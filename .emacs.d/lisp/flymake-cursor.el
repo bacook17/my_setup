@@ -1,5 +1,6 @@
 ;;; flymake-cursor.el --- Show flymake messages in the minibuffer after delay
 ;; VALID FOR emacs >= 26
+;; https://github.com/akash-akya/emacs-flymake-cursor
 ;;
 ;; Copyright (C) 2011-2012  Free Software Foundation, Inc.
 ;;
