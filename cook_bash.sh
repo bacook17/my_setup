@@ -1,32 +1,42 @@
 ### Taken from Barry Clark's bashstrap (https://github.com/barryclark/bashstrap.git)
 
+conda activate ben.cook
+
 ### Aliases
 
 # Open specified files in Sublime Text
 # "s ." will open the current directory in Sublime
 alias e='emacs -nw'
 alias rm='rm -i'
+alias mv='mv -vn'
+alias cp='cp -vn'
 
 function notebook() {
-    jupyter notebook $1
+    jupyter lab $1
 }
 
-# UPDATE THIS
-export HOME_PATH="/Users/bcook"
-export CONDA_PATH="${HOME_PATH}/anaconda"
+function parquet_check() {
+    cd /binder_scratch/ben-2ecook/click_quality/
+    while :
+    do
+	clear
+	echo "       $(date +"%T")"
+	lt *"$(date +"%Y%m%d")"*.parquet | awk '{print $6,$7,$8,$5,$9}'
+	sleep 5
+    done
+}
 
-export PATH="${CONDA_PATH}/bin:${HOME_PATH}/scripts:/opt/local/bin:/opt/local/sbin:$PATH"
-export PYTHONPATH="${CONDA_PATH}/bin:${CONDA_PATH}/lib:${CONDA_PATH}/lib/python2.7/site-packages:${HOME_PATH}/scripts:$PYTHONPATH:."
-
+# disable HDF5 file locking
+export HDF5_USE_FILE_LOCKING='FALSE'
+export PATH="/home/ben.cook/miniconda3/envs/ben.cook/bin:$PATH:/home/ben.cook/scripts:."
+export PYTHONPATH="$PYTHONPATH:/scratch/ben.cook"
 
 # Color LS
-# for OSX
-colorflag="-G"
-# for Linux machines
-# colorflag="--color"
+colorflag="--color"
 alias ls="command ls ${colorflag}"
 alias l="ls -laFh ${colorflag}" # all files, in long format
 alias lt="ls -latFh ${colorflag}" # all files, in long format, sorted by date
+alias lh="ls -latfh ${colorflag} | head -n 10" # same as lt, with only first 10 results
 alias lsd='ls -lFh ${colorflag} | grep "^d"' # only directories
 
 ### Prompt Colors
@@ -79,9 +89,11 @@ export RESET
 
 # Git branch details
 function parse_git_dirty() {
-    [[ $(git status 2> /dev/null | tail -n1) != *"working tree clean"* ]] && echo "*"
-    #echo ""
+    # This is very slow if directory is big
+    [[ $(git status 2> /dev/null | tail -n1) != *"nothing to commit"* ]] && echo "*"
+    # echo ""
 }
+
 function parse_git_branch() {
     repo=$(basename `git rev-parse --show-toplevel 2> /dev/null` 2> /dev/null)
     branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/")
@@ -92,7 +104,7 @@ function parse_git_branch() {
 # (http://en.wikipedia.org/wiki/Unicode_symbols)
 symbol="⚡  "
 
-export PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\] @ \[$ORANGE\]${HOSTNAME} \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n$symbol\[$RESET\]"
+export PS1="\[${BOLD}${MAGENTA}\]\u\[$WHITE\] @ \[$ORANGE\]$HOSTNAME \[$WHITE\]in \[$GREEN\]\w\[$WHITE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" on \")\[$PURPLE\]\$(parse_git_branch)\[$WHITE\]\n$symbol\[$RESET\]"
 export PS2="\[$ORANGE\]→ \[$RESET\]"
 
 
@@ -100,7 +112,3 @@ export PS2="\[$ORANGE\]→ \[$RESET\]"
 
 # Only show the current directory's name in the tab
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
-
-##
-# Your previous /Users/bcook/.bash_profile file was backed up as /Users/bcook/.bash_profile.macports-saved_2015-04-02_at_15:39:49
-##
