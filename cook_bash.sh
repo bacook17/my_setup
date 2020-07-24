@@ -1,6 +1,6 @@
 ### Taken from Barry Clark's bashstrap (https://github.com/barryclark/bashstrap.git)
 
-conda activate ben.cook
+conda activate ben.cook.qr
 
 ### Aliases
 
