@@ -33,6 +33,7 @@ environment:
 	@echo "\n\n**********\nIMPORTANT:\nIt is now recommended that you add the following to your .bashrc file: \n"
 	@echo "conda activate ben.cook.qr"
 	@echo "\nso this environment is activated upon connecting\n**********\n"
+	@echo "\n\n**********\nIMPORTANT:\nYou should also copy the file 'pinned' to the environments conda-meta file\n"
 
 extensions:
 	-@./install_extensions.sh

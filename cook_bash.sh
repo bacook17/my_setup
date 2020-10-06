@@ -17,7 +17,16 @@ alias sshtick21='ssh ben.cook@ch1devtick21'
 
 
 function notebook() {
-    jupyter lab $1
+    jupyter lab --no-browser
+}
+
+function public_notebook() {
+    if [ $# -eq 0 ]
+    then
+	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --port=9998
+    else
+	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --port=$1
+    fi
 }
 
 function parquet_check() {
@@ -117,3 +126,8 @@ export PS2="\[$ORANGE\]→ \[$RESET\]"
 
 # Only show the current directory's name in the tab
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD##*/}\007"'
+
+# change ls colors
+# directories will be bold blue with dark grey background
+# files will be bright white
+#LS_COLORS=$LS_COLORS:'di=1;34;100:fi=97:' ; export LS_COLORS

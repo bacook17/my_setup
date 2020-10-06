@@ -14,6 +14,7 @@ xtick.color : w
 ytick.color : w
 
 ## General Settings
+timezone: US/Central
 image.origin : lower
 savefig.format : pdf
 savefig.bbox : tight
@@ -35,4 +36,4 @@ ytick.labelsize: 10.0
 ytick.major.pad: 8
 ytick.major.width: 1.6
 ytick.minor.width: 0.8
-axes.prop_cycle :  cycler('linestyle', ['-', '--', ':', '-.']) * cycler('color', ['0072b2', '009e73', 'd55e00', 'cc79a7', 'f0e442', '56b4e9', '0072b2', '009e73', 'd55e00', 'cc79a7'])
+axes.prop_cycle :  cycler('linestyle', ['-', '--', ':', '-.']) * cycler('color', ['0072b2', 'd55e00', '009e73', 'cc79a7', 'f0e442', '56b4e9'])
