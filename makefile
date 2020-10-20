@@ -1,9 +1,10 @@
 SHELL=/bin/bash
 NOW=$(shell date +'%Y%m%d%H%M%S')
-ENVIRONMENT="ben.cook.default"
+ENV_FILE="environment.yml"
+ENVIRONMENT := $(shell head -n 1 $(ENV_FILE) | sed -e "s/^name: //")
 CONDA_BASE := $(shell conda info --base)
 
-all: python linux
+all: linux python
 
 python: conda environment extensions matplotlib
 
