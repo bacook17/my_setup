@@ -61,4 +61,3 @@ matplotlib:
 	-mkdir ~/.config/matplotlib/
 	-mkdir ~/.config/matplotlib/stylelib/
 	cp mplstylefiles/* ~/.config/matplotlib/stylelib/
-
