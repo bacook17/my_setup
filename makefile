@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 NOW=$(shell date +'%Y%m%d%H%M%S')
 ENVIRONMENT="ben.cook.qr"
+CONDA_BASE := $(shell conda info --base)
 
 all: python linux
 
@@ -28,7 +29,8 @@ git:
 conda:
 	-@sh install_conda.sh
 	-@rm Miniconda3-latest-Linux-x86_64.sh
-	-@conda activate base && conda install mamba
+	-@ln -s "${PWD}/.condarc" ~/.condarc
+	-@source "$(CONDA_BASE)/etc/profile.d/conda.sh" && conda activate base && conda install mamba
 
 environment:
 	@mamba env create -f environment.yml || conda env create -f environment.yml
@@ -36,11 +38,13 @@ environment:
 		else echo "conda activate $(ENVIRONMENT)" >> ~/.bashrc; fi
 	-@if grep -q "conda activate $(ENVIRONMENT)" ~/.bash_profile; then echo ".bash_profile all set"; \
 		else echo "conda activate $(ENVIRONMENT)" >> ~/.bash_profile; fi
-	-@conda activate $(ENVIRONMENT) && python -m ipykernel install --user --name $(ENVIRONMENT) --display-name "Python3 ($(ENVIRONMENT))"
+	-@ln -s "${PWD}/pinned" "$(CONDA_BASE)/envs/$(ENVIRONMENT)/conda-meta/pinned"
+	-@source "$(CONDA_BASE)/etc/profile.d/conda.sh" && conda activate $(ENVIRONMENT) && \
+		python -m ipykernel install --user --name $(ENVIRONMENT) --display-name "Python3 ($(ENVIRONMENT))"
 
 optimus:
 	@mamba env create -f optimus_environment.yml || conda env create -f optimus_environment.yml
-	-@conda activate ben.cook.optimus && python -m ipykernel install --user --name ben.cook.optimus --display-name "Python3 (optimus)"
+	-@source "$(CONDA_BASE)/etc/profile.d/conda.sh" && conda activate ben.cook.optimus && python -m ipykernel install --user --name ben.cook.optimus --display-name "Python3 (optimus)"
 
 extensions:
 	-@./install_extensions.sh $(ENVIRONMENT)

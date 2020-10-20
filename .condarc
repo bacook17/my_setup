@@ -1,0 +1,10 @@
+channels:
+  - http://swrepo.akunacapital.local/pyrepo/v3/repo/prod
+  - http://swrepo.akunacapital.local/pyrepo/v3/repo/dev
+  - http://swrepo.akunacapital.local/pyrepo/v3/repo/third_party/
+  - https://repo.continuum.io/pkgs/main/
+  - https://conda.anaconda.org/conda-forge
+  - defaults
+ssl_verify: false
+report_errors: true
+channel_priority: disabled
