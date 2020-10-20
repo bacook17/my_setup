@@ -16,6 +16,8 @@ dependencies:
   - black=19.10b0
   - emacs>=26.3
   - jupyterlab_code_formatter
+  - jupyterlab-git
+  - pathlib
   # Pip
   - pip:
     - nbresuse
