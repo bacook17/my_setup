@@ -1,14 +1,15 @@
 SHELL=/bin/bash
 NOW=$(shell date +'%Y%m%d%H%M%S')
+ENVIRONMENT="ben.cook.qr"
 
 all: python linux
 
-python: conda environment extensions matplotlib
+python: conda environment extensions matplotlib optimus
 
 linux: bash latex git emacs
 
 bash:
-	-ln -s ./cook_bash.sh ~/cook_bash.sh
+	-ln -s "${PWD}/cook_bash.sh" ~/cook_bash.sh
 	@if grep -q "cook_bash.sh" ~/.bashrc; then echo ".bashrc all set"; \
 		else echo "source ~/cook_bash.sh" >> ~/.bashrc; fi
 	@if grep -q "cook_bash.sh" ~/.bash_profile; then echo ".bash_profile all set"; \
@@ -16,27 +17,33 @@ bash:
 
 latex:
 	-@mkdir ~/scripts
-	-ln -s ./scripts/latexdriver ~/scripts/latexdriver
+	-ln -s "${PWD}/scripts/latexdriver" ~/scripts/latexdriver
 
 git:
 	-cp ~/.gitconfig ~/.gitconfig_$(NOW)
 	cp ./.gitconfig ~/.gitconfig
 	-cp ~/.gitignore_global ~/.gitignore_global_$(NOW)
-	cp ./.gitignore ~/.gitignore
+	cp ./.gitignore_global ~/.gitignore_global
 
 conda:
 	-@sh install_conda.sh
 	-@rm Miniconda3-latest-Linux-x86_64.sh
+	-@conda activate base && conda install mamba
 
 environment:
-	@conda env create -f environment.yml
-	@echo "\n\n**********\nIMPORTANT:\nIt is now recommended that you add the following to your .bashrc file: \n"
-	@echo "conda activate ben.cook.qr"
-	@echo "\nso this environment is activated upon connecting\n**********\n"
-	@echo "\n\n**********\nIMPORTANT:\nYou should also copy the file 'pinned' to the environments conda-meta file\n"
+	@mamba env create -f environment.yml || conda env create -f environment.yml
+	-@if grep -q "conda activate $(ENVIRONMENT)" ~/.bashrc; then echo ".bashrc all set"; \
+		else echo "conda activate $(ENVIRONMENT)" >> ~/.bashrc; fi
+	-@if grep -q "conda activate $(ENVIRONMENT)" ~/.bash_profile; then echo ".bash_profile all set"; \
+		else echo "conda activate $(ENVIRONMENT)" >> ~/.bash_profile; fi
+	-@conda activate $(ENVIRONMENT) && python -m ipykernel install --user --name $(ENVIRONMENT) --display-name "Python3 ($(ENVIRONMENT))"
+
+optimus:
+	@mamba env create -f optimus_environment.yml || conda env create -f optimus_environment.yml
+	-@conda activate ben.cook.optimus && python -m ipykernel install --user --name ben.cook.optimus --display-name "Python3 (optimus)"
 
 extensions:
-	-@./install_extensions.sh
+	-@./install_extensions.sh $(ENVIRONMENT)
 
 emacs:
 	-cp ~/.emacs ~/.emacs_$(NOW)

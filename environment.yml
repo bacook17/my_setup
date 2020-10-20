@@ -39,6 +39,7 @@ dependencies:
   - black_mamba=2.28.4  # until ubuntu upgraded
   - h2=3.1.1  # hack, dependency issue with hdal
   - numpy=1.17.*  # vader issues
+  - numpy-base=1.17.*  # vader issues
   # Pip
   - pip:
     - nbresuse
