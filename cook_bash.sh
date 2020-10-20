@@ -12,11 +12,11 @@ function notebook() {
 }
 
 # UPDATE THIS
-export HOME_PATH="/Users/bcook"
-export CONDA_PATH="${HOME_PATH}/anaconda"
+export HOME_PATH="/Users/ben.cook"
+export CONDA_PATH="${HOME_PATH}/miniconda3"
 
 export PATH="${CONDA_PATH}/bin:${HOME_PATH}/scripts:/opt/local/bin:/opt/local/sbin:$PATH"
-export PYTHONPATH="${CONDA_PATH}/bin:${CONDA_PATH}/lib:${CONDA_PATH}/lib/python2.7/site-packages:${HOME_PATH}/scripts:$PYTHONPATH:."
+export PYTHONPATH="${CONDA_PATH}/bin:${CONDA_PATH}/lib:${CONDA_PATH}/lib/python3.6/site-packages:${HOME_PATH}/scripts:$PYTHONPATH:."
 
 
 # Color LS

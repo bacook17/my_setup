@@ -1,10 +1,7 @@
-name: ben.cook.qr
+name: ben.cook.default
 channels:
   - conda-forge
   - defaults
-  - http://swrepo.akunacapital.local/pyrepo/v3/repo/dev
-  - http://swrepo.akunacapital.local/pyrepo/v3/repo/prod
-  - http://swrepo.akunacapital.local/pyrepo/v3/repo/third_party
 dependencies:
   # General purpose
   - python=3.6.8
@@ -14,18 +11,6 @@ dependencies:
   - ca-certificates
   - tqdm
   - pip
-  # Akuna-specific
-  - basilisk>=3.3.3
-  - black_mamba=2.28.4  # until ubuntu upgraded
-  - chainlink>=0.7.4
-  - ddo>=4.84.2
-  - ddo_utils>=6.18.0
-  - encodediid2
-  - hdal>=9.45.0
-  - pricing_data>=4.3.6
-  - pyrametron
-  - stores>=3.6.0
-  - vol_research>=0.5.1
   # Ben Optional
   - appmode
   - black=19.10b0

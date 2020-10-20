@@ -1,11 +1,11 @@
 SHELL=/bin/bash
 NOW=$(shell date +'%Y%m%d%H%M%S')
+ENVIRONMENT="ben.cook.default"
 
-my_setup: bash latex git conda environment extensions emacs matplotlib
+all: bash latex git conda home_environment extensions emacs matplotlib
 
 bash:
-	-cp ~/cook_bash.sh ~/cook_bash_$(NOW).sh
-	cp ./cook_bash.sh ~/cook_bash.sh
+	-ln -s ./cook_bash.sh ~/cook_bash.sh
 	@if grep -q "cook_bash.sh" ~/.bashrc; then echo ".bashrc all set"; \
 		else echo "source ~/cook_bash.sh" >> ~/.bashrc; fi
 	@if grep -q "cook_bash.sh" ~/.bash_profile; then echo ".bash_profile all set"; \
@@ -26,15 +26,17 @@ git:
 conda:
 	-@sh install_conda.sh
 	-@rm Miniconda3-latest-Linux-x86_64.sh
+	-@rm Miniconda3-latest-MacOSX-x86_64.sh
 
 environment:
 	@conda env create -f environment.yml
-	@echo "\n\n**********\nIMPORTANT:\nIt is now recommended that you add the following to your .bashrc file: \n"
-	@echo "conda activate ben.cook.qr"
-	@echo "\nso this environment is activated upon connecting\n**********\n"
+	@if grep -q "conda activate $(ENVIRONMENT)" ~/.bashrc; then echo ".bashrc all set"; \
+		else echo "conda activate $(ENVIRONMENT)" >> ~/.bashrc; fi
+	@if grep -q "conda activate $(ENVIRONMENT)" ~/.bash_profile; then echo ".bash_profile all set"; \
+		else echo "conda activate $(ENVIRONMENT)" >> ~/.bash_profile; fi
 
 extensions:
-	-@./install_extensions.sh
+	-@./install_extensions.sh $(ENVIRONMENT)
 
 emacs:	./.emacs
 	-cp ~/.emacs ~/.emacs_$(NOW)

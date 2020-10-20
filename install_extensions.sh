@@ -1,6 +1,7 @@
+if [ $# -eq 0 ]; then echo "Must pass an environment name" && exit 1; fi
 source ~/miniconda3/etc/profile.d/conda.sh
-echo "activating environment ben.cook.qr"
-conda activate ben.cook.qr
+echo "activating environment ${1}"
+conda activate $1
 echo "installing jupyterlab extensions"
 jupyter labextension install @jupyter-widgets/jupyterlab-manager
 jupyter labextension install @ryantam626/jupyterlab_code_formatter
