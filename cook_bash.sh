@@ -2,16 +2,31 @@
 
 ### Aliases
 
-# Open specified files in Sublime Text
-# "s ." will open the current directory in Sublime
 alias e='emacs -nw'
 alias rm='rm -i'
+alias mv='mv -vn'
+alias cp='cp -vn'
 
+# Akuna specific                                                                                                      
+alias sshtick14='ssh ben.cook@ch1devtick14'
+alias sshtick15='ssh ben.cook@ch1devtick15'
+alias sshtick16='ssh ben.cook@ch1devtick16'
+alias sshtick21='ssh ben.cook@ch1devtick21'
+alias sshchicago='ssh ben.cook@ch1-dev-vml005'
+function sshtick() {
+    if [ $# -eq 0 ]; then
+        ssh ben.cook@ch1devtick16;
+    else
+        ssh "ben.cook@ch1devtick${1}";
+    fi
+}
 function notebook() {
     jupyter notebook $1
 }
 
 # UPDATE THIS
+export HDF5_USE_FILE_LOCKING='FALSE'
+
 export HOME_PATH="/Users/ben.cook"
 export CONDA_PATH="${HOME_PATH}/miniconda3"
 
