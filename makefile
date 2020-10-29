@@ -32,10 +32,9 @@ conda:
 	-@rm Miniconda3-latest-Linux-x86_64.sh
 	-@rm Miniconda3-latest-MacOSX-x86_64.sh
 	-@ln -s "${PWD}/.condarc" ~/.condarc
-	-@source "$(CONDA_BASE)/etc/profile.d/conda.sh" && conda activate base && conda install mamba -c conda-forge
 
 environment:
-	@mamba env create -f environment.yml || conda env create -f environment.yml
+	conda env create -f environment.yml
 	-@if grep -q "conda activate $(ENVIRONMENT)" ~/.bashrc; then echo ".bashrc all set"; \
 		else echo "conda activate $(ENVIRONMENT)" >> ~/.bashrc; fi
 	-@if grep -q "conda activate $(ENVIRONMENT)" ~/.bash_profile; then echo ".bash_profile all set"; \

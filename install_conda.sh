@@ -1,7 +1,7 @@
-if [[ $HOSTNAME == *"MacBook"* ]]; then
-    FILENAME="Miniconda3-latest-MacOSX-x86_64.sh";
-else
+if [[ $(uname -s) == "Linux" ]]; then
     FILENAME="Miniconda3-latest-Linux-x86_64.sh";
+else
+    FILENAME="Miniconda3-latest-MacOSX-x86_64.sh";
 fi
 if which conda 2> /dev/null; then
     echo "Conda already installed";
