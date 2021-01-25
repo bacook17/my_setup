@@ -1,48 +1,41 @@
-name: ben.cook.qr
+name: ben.cook.bqr
 channels:
-  - conda-forge
+  - conda-prod
+  - conda-forge-remote
+  - conda-thirdparty
   - defaults
-  - http://swrepo.akunacapital.local/pyrepo/v3/repo/dev
-  - http://swrepo.akunacapital.local/pyrepo/v3/repo/prod
-  - http://swrepo.akunacapital.local/pyrepo/v3/repo/third_party
 dependencies:
-  # General purpose
+  # General Purpose
   - python=3.6.8
   - anaconda
-  - jupyterlab
+  - appmode
+  - black
   - bokeh
   - ca-certificates
-  - tqdm
+  - emacs
+  - git
+  - jupyterlab>=3.0
   - pip
   # Akuna-specific
-  - basilisk>=3.3.3
-  - chainlink>=0.7.4
-  - ddo>=4.92.0
-  - ddo_utils>=8.0.2
-  - encodediid2
-  - hdal>=9.50.1
-  - pricing_data>=4.3.6
+  - black_mamba>=3.2.3
+  - boston_tasks
+  - ddo
+  - ddo_utils>=8.38.2
+  - hdal
+  - pricing_data>=4.5.3
   - pyrametron
-  - pysolace
-  - stores>=5.1.4
-  - vol_research>=0.5.1
-  - vsq_data>=0.4.0
+  - vader=1.0.1
+  - vol_research>=1.0.2
+  - vsq_data>=0.13.0
   # Ben Optional
-  - appmode
-  - black=19.10b0
-  - emacs>=26.3
   - jupyterlab_code_formatter
   - jupyterlab-git
-  - sprockets
   - pathlib
+  - sprockets
   # For Dependency Reasons
-  - black_mamba=2.28.4  # until ubuntu upgraded
-  - h2=3.1.1  # hack, dependency issue with hdal
-  - numpy=1.17.*  # vader issues
-  - numpy-base=1.17.*  # vader issues
   # Pip
   - pip:
     - nbresuse
     - corner
-    - black-macchiato==1.1.0
-    - dataframe_image
+    - black-macchiato
+    - aquirdturtle_collapsible_headings

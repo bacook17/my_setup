@@ -1,7 +1,5 @@
 ### Taken from Barry Clark's bashstrap (https://github.com/barryclark/bashstrap.git)
 
-conda activate ben.cook.qr
-
 ### Aliases
 
 alias e='emacs -nw'
@@ -13,8 +11,11 @@ alias cp='cp -vn'
 alias sshtick14='ssh ben.cook@ch1devtick14'
 alias sshtick15='ssh ben.cook@ch1devtick15'
 alias sshtick16='ssh ben.cook@ch1devtick16'
+alias sshtick20='ssh ben.cook@ch1devtick20'
 alias sshtick21='ssh ben.cook@ch1devtick21'
-alias sshchicago='ssh ben.cook@ch1-dev-vml005'
+alias sshtick37='ssh ben.cook@ch1devtick37'
+alias sshchicago='ssh ben.cook@ch1-dev-vml006'
+alias sshbqr='ssh ben.cook@ch1devtick37'
 function sshtick() {
     if [ $# -eq 0 ]; then
         ssh ben.cook@ch1devtick16;
@@ -30,7 +31,7 @@ function notebook() {
 function public_notebook() {
     if [ $# -eq 0 ]
     then
-	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --port=9998
+	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --port=1734
     else
 	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --port=$1
     fi
@@ -111,7 +112,7 @@ export RESET
 # Git branch details
 function parse_git_dirty() {
     # This is very slow if directory is big
-    [[ $(git status 2> /dev/null | tail -n1) != *"nothing to commit"* ]] && echo "*"
+    [[ -z $(git status -s 2> /dev/null) ]] || echo "*"
     # echo ""
 }
 

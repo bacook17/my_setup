@@ -6,7 +6,7 @@ CONDA_BASE := $(shell conda info --base)
 
 all: linux python
 
-python: conda environment extensions matplotlib optimus
+python: conda environment matplotlib optimus
 
 linux: bash latex git emacs
 
@@ -53,12 +53,12 @@ environment:
 		else echo "conda activate $(ENVIRONMENT)" >> ~/.bashrc; fi
 	-@if grep -q "conda activate $(ENVIRONMENT)" ~/.bash_profile; then echo ".bash_profile all set"; \
 		else echo "conda activate $(ENVIRONMENT)" >> ~/.bash_profile; fi
-	-@ln -s "${PWD}/pinned" "$(CONDA_BASE)/envs/$(ENVIRONMENT)/conda-meta/pinned"
 	-@source "$(CONDA_BASE)/etc/profile.d/conda.sh" && conda activate $(ENVIRONMENT) && \
 		python -m ipykernel install --user --name $(ENVIRONMENT) --display-name "Python3 ($(ENVIRONMENT))"
 
-extensions:
-	-@./install_extensions.sh $(ENVIRONMENT)
+# No longer needed as of Jupyterlab 3.0
+# extensions:
+# 	-@./install_extensions.sh $(ENVIRONMENT)
 
 matplotlib:
 	-mkdir ~/.config/
