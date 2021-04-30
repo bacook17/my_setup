@@ -25,17 +25,20 @@ dependencies:
   - pricing_data>=4.5.3
   - pyrametron
   - vader=1.0.1
+  - val_data>=2.3.0
   - vol_research>=1.0.2
   - vsq_data>=0.13.0
   # Ben Optional
   - jupyterlab_code_formatter
-  - jupyterlab-git
+  - jupyter-resource-usage
+  # - jupyterlab-git
   - pathlib
   - sprockets
   # For Dependency Reasons
   # Pip
   - pip:
-    - nbresuse
     - corner
     - black-macchiato
     - aquirdturtle_collapsible_headings
+    - jupyterlab-git==0.30.0b1
+    

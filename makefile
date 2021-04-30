@@ -6,7 +6,7 @@ CONDA_BASE := $(shell conda info --base)
 
 all: linux python
 
-python: conda environment matplotlib optimus
+python: conda environment matplotlib # optimus
 
 linux: bash latex git emacs
 

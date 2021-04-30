@@ -1,0 +1,10 @@
+{
+    "ServerApp": {
+	"port": 1734,
+	"ip": "0.0.0.0",
+	"password": "sha1:77ee2d3970f0:530bc8f895a62b06fba833cf0a5d62137116d807"
+    },
+    "FileCheckpoints": {
+	"checkpoint_dir": "/home/ben.cook/.ipynb_checkpoints/"
+    }
+}

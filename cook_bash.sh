@@ -1,5 +1,7 @@
 ### Taken from Barry Clark's bashstrap (https://github.com/barryclark/bashstrap.git)
 
+conda activate ben.cook.bqr
+
 ### Aliases
 
 alias e='emacs -nw'
@@ -16,6 +18,7 @@ alias sshtick21='ssh ben.cook@ch1devtick21'
 alias sshtick37='ssh ben.cook@ch1devtick37'
 alias sshchicago='ssh ben.cook@ch1-dev-vml006'
 alias sshbqr='ssh ben.cook@ch1devtick37'
+alias sshtsb='ssh -t ben.cook@ch1devtick37 "bash --rcfile .bashrc_tsb"'
 function sshtick() {
     if [ $# -eq 0 ]; then
         ssh ben.cook@ch1devtick16;
@@ -37,21 +40,12 @@ function public_notebook() {
     fi
 }
 
-function parquet_check() {
-    cd /binder_scratch/ben-2ecook/click_quality/
-    while :
-    do
-	clear
-	echo "       $(date +"%T")"
-	lt *"$(date +"%Y%m%d")"*.parquet | awk '{print $6,$7,$8,$5,$9}'
-	sleep 5
-    done
-}
-
 # disable HDF5 file locking
 export HDF5_USE_FILE_LOCKING='FALSE'
 export PATH="/home/ben.cook/miniconda3/envs/ben.cook/bin:$PATH:/home/ben.cook/scripts:."
-export PYTHONPATH="$PYTHONPATH:/scratch/ben.cook"
+
+# utils now installed with invoke develop
+# export PYTHONPATH="$PYTHONPATH:/scratch/ben.cook"
 
 # Color LS
 colorflag="--color"

@@ -1,0 +1,9 @@
+{
+    "NotebookApp": {
+	"port": 1734,
+	"ip": "0.0.0.0"
+    },
+  "FileCheckpoints": {
+    "checkpoint_dir": "/home/ben.cook/.ipynb_checkpoints/"
+  }
+}
