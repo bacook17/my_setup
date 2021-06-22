@@ -1,4 +1,4 @@
-name: ben.cook.bqr
+name: ben.cook.bqr_py36
 channels:
   - conda-prod
   - conda-forge-remote
@@ -6,7 +6,7 @@ channels:
   - defaults
 dependencies:
   # General Purpose
-  - python=3.8.*
+  - python=3.6.8
   - anaconda
   - appmode
   - black
@@ -16,7 +16,6 @@ dependencies:
   - git
   - ipympl
   - jupyterlab>=3.0
-  - ipywidgets
   - pip
   # Akuna-specific
   - black_mamba>=3.2.3
@@ -28,21 +27,21 @@ dependencies:
   - pricing_data>=4.5.3
   - presto-client=0.300.0
   - pyrametron
-  # - vader=1.0.1
+  - vader=1.0.1
   - val_data>=2.3.0
   - vol_research>=1.0.2
   - vsq_data>=0.13.0
   # Ben Optional
   - jupyterlab_code_formatter
   - jupyter-resource-usage
-  - jupyter_bokeh
-  - jupyterlab-git
-  - corner
+  # - jupyterlab-git
   - pathlib
   - sprockets
   # For Dependency Reasons
   # Pip
   - pip:
+    - corner
     - black-macchiato
     - aquirdturtle_collapsible_headings
+    - jupyterlab-git==0.30.0b1
     

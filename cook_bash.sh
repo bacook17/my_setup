@@ -34,9 +34,9 @@ function notebook() {
 function public_notebook() {
     if [ $# -eq 0 ]
     then
-	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --port=1734
+	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --NotebookApp.ip="0.0.0.0" --port=1735 --no-browser
     else
-	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --port=$1
+	jupyter notebook --NotebookApp.password="" --NotebookApp.token="" --NotebookApp.ip="0.0.0.0" --port=$1 --no-browser
     fi
 }
 
